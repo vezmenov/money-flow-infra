@@ -1,0 +1,26 @@
+services:
+  backend:
+    build:
+      context: ../money-flow-backend
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    volumes:
+      - ../money-flow-backend/data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ../money-flow
+    restart: unless-stopped
+
+  proxy:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
