@@ -5,7 +5,12 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-      APP_API_KEY: ${APP_API_KEY:-dev}
+      APP_API_KEY: ${APP_API_KEY:-}
+      OPENCLAW_API_KEY: ${OPENCLAW_API_KEY:-}
+      DB_PATH: ${DB_PATH:-data/database.sqlite}
+      BACKUP_DIR: ${BACKUP_DIR:-data/backups}
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-30}
+      CORS_ORIGIN: ${CORS_ORIGIN:-}
     volumes:
       - ../money-flow-backend/data:/app/data
     restart: unless-stopped
@@ -16,7 +21,7 @@ services:
       args:
         APP_BUILD_VERSION: ${APP_BUILD_VERSION:-dev}
         APP_BUILD_TIME: ${APP_BUILD_TIME:-unknown}
-        APP_API_KEY: ${APP_API_KEY:-dev}
+        APP_API_KEY: ${APP_API_KEY:-}
     restart: unless-stopped
 
   proxy:
