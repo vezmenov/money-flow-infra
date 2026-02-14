@@ -5,6 +5,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
+      APP_API_KEY: ${APP_API_KEY:-dev}
     volumes:
       - ../money-flow-backend/data:/app/data
     restart: unless-stopped
@@ -15,6 +16,7 @@ services:
       args:
         APP_BUILD_VERSION: ${APP_BUILD_VERSION:-dev}
         APP_BUILD_TIME: ${APP_BUILD_TIME:-unknown}
+        APP_API_KEY: ${APP_API_KEY:-dev}
     restart: unless-stopped
 
   proxy:
